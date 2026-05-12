@@ -15,7 +15,6 @@ PasarGuard.ApiClient.NET generates clean, scalable, and fully asynchronous C# AP
 * Nullable Reference Types
 * Clean Architecture
 * Typed API Clients
-* System.Text.Json
 
 ---
 
