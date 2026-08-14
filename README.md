@@ -23,7 +23,7 @@ dotnet add package PasarGuard.ApiClient
 Or add it directly to your project:
 
 ```xml
-<PackageReference Include="PasarGuard.ApiClient" Version="5.2.2" />
+<PackageReference Include="PasarGuard.ApiClient" Version="5.2.1.1" />
 ```
 
 ## Configuration
@@ -175,7 +175,7 @@ Each package release identifies its supported PasarGuardAPI version. Application
 
 ## Versioning
 
-Package versions follow [Semantic Versioning](https://semver.org/). The supported PasarGuardAPI version is stated in the package description and release notes.
+Package versions use the format `PasarGuardAPI version.Package revision`. For example, `5.2.1.1` targets PasarGuardAPI `5.2.1` and represents the first client-package revision for that API release. Package-only fixes increment the fourth segment, while support for a new PasarGuardAPI release updates the first three segments and resets the package revision to `1`.
 
 ## License
 

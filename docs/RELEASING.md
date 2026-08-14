@@ -30,15 +30,20 @@ No NuGet API key is required. The workflow exchanges GitHub's OIDC identity for 
 
 ## Publish a release
 
-Every push to `master` starts the publication workflow. The workflow reads `PackageVersion` from `src/PasarGuard.ApiClient/PasarGuard.ApiClient.csproj` and checks the exact package version in the NuGet.org V3 registry.
+Every push to `master` starts the publication workflow. The workflow reads `PackageVersion` from `src/PasarGuard.ApiClient/PasarGuard.ApiClient.csproj`, validates it against `info.version` in `openapi/openapi.json`, and checks the exact package version in the NuGet.org V3 registry.
 
 If the version already exists, publication is skipped successfully. If it does not exist, the workflow builds the complete solution, runs formatting verification and all tests, creates `.nupkg` and `.snupkg` files, uploads them as a GitHub Actions artifact, and publishes both packages to NuGet.org.
 
-To publish a new release, update `VersionPrefix` in the package project and push the commit to `master`:
+Package versions use `PasarGuardApiVersion.PackageRevision`. The first three segments must equal the OpenAPI source version and the positive fourth segment identifies package-only revisions.
+
+For a package-only fix, increment `PackageRevision` and push the commit to `master`:
 
 ```xml
-<VersionPrefix>5.2.3</VersionPrefix>
+<PasarGuardApiVersion>5.2.1</PasarGuardApiVersion>
+<PackageRevision>2</PackageRevision>
 ```
+
+When PasarGuardAPI changes, update the OpenAPI snapshot, set `PasarGuardApiVersion` to its `info.version`, and reset `PackageRevision` to `1`.
 
 The workflow can also be started from **Actions > Publish NuGet > Run workflow** to repeat the same version check for the selected branch.
 

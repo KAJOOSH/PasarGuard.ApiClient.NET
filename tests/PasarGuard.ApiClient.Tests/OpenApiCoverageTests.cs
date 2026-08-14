@@ -49,6 +49,23 @@ public sealed class OpenApiCoverageTests
         Assert.Equal(expectedCount, actualCount);
     }
 
+    [Fact]
+    public void PackageVersionUsesOpenApiVersionAndPositiveRevision()
+    {
+        using var document = LoadSpecification();
+        var apiVersion = document.RootElement.GetProperty("info").GetProperty("version").GetString()!;
+        var packageVersion = typeof(IPasarGuardApiClient).Assembly
+            .GetCustomAttribute<AssemblyInformationalVersionAttribute>()!
+            .InformationalVersion
+            .Split('+')[0];
+        var packageSegments = packageVersion.Split('.');
+
+        Assert.Equal(4, packageSegments.Length);
+        Assert.Equal(apiVersion, string.Join('.', packageSegments.Take(3)));
+        Assert.True(int.TryParse(packageSegments[3], out var revision));
+        Assert.True(revision > 0);
+    }
+
     private static JsonDocument LoadSpecification()
     {
         return JsonDocument.Parse(File.ReadAllText(Path.Combine(AppContext.BaseDirectory, "openapi.json")));

@@ -9,9 +9,11 @@
     <Deterministic>true</Deterministic>
     <ContinuousIntegrationBuild Condition="'$(CI)' == 'true'">true</ContinuousIntegrationBuild>
     <PackageId>PasarGuard.ApiClient</PackageId>
-    <VersionPrefix>5.2.2</VersionPrefix>
+    <PasarGuardApiVersion>5.2.1</PasarGuardApiVersion>
+    <PackageRevision>1</PackageRevision>
+    <VersionPrefix>$(PasarGuardApiVersion).$(PackageRevision)</VersionPrefix>
     <Authors>PasarGuard.ApiClient.NET contributors</Authors>
-    <Description>Strongly typed, asynchronous .NET client for the complete PasarGuardAPI 5.2.1 surface.</Description>
+    <Description>Strongly typed, asynchronous .NET client for the complete PasarGuardAPI $(PasarGuardApiVersion) surface.</Description>
     <PackageTags>pasarguard;api;client;sdk;vpn</PackageTags>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageReadmeFile>README.md</PackageReadmeFile>
