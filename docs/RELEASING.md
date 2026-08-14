@@ -37,7 +37,7 @@ If the version already exists, publication is skipped successfully. If it does n
 To publish a new release, update `VersionPrefix` in the package project and push the commit to `master`:
 
 ```xml
-<VersionPrefix>5.2.2</VersionPrefix>
+<VersionPrefix>5.2.3</VersionPrefix>
 ```
 
 The workflow can also be started from **Actions > Publish NuGet > Run workflow** to repeat the same version check for the selected branch.

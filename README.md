@@ -23,7 +23,7 @@ dotnet add package PasarGuard.ApiClient
 Or add it directly to your project:
 
 ```xml
-<PackageReference Include="PasarGuard.ApiClient" Version="5.2.1" />
+<PackageReference Include="PasarGuard.ApiClient" Version="5.2.2" />
 ```
 
 ## Configuration
@@ -169,10 +169,9 @@ The aggregate `IPasarGuardApiClient` provides access to the following clients:
 
 Individual clients such as `IUserClient` or `INodeClient` can also be resolved directly through dependency injection.
 
-## API reference
+## Compatibility
 
-- [PasarGuardAPI documentation](https://65.109.216.65:8000/docs)
-- [PasarGuardAPI OpenAPI document](https://65.109.216.65:8000/openapi.json)
+Each package release identifies its supported PasarGuardAPI version. Applications should keep the client and server versions aligned when endpoint contracts or data models change.
 
 ## Versioning
 
