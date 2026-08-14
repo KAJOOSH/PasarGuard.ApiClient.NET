@@ -7,12 +7,12 @@ namespace PasarGuard.ApiClient.Models;
 [JsonConverter(typeof(PasarGuardEnumJsonConverter<Period>))]
 public enum Period
 {
-    [EnumMember(Value = @"minute")]
+    [EnumMember(Value = "minute")]
     Minute,
-    [EnumMember(Value = @"hour")]
+    [EnumMember(Value = "hour")]
     Hour,
-    [EnumMember(Value = @"day")]
+    [EnumMember(Value = "day")]
     Day,
-    [EnumMember(Value = @"month")]
+    [EnumMember(Value = "month")]
     Month
 }

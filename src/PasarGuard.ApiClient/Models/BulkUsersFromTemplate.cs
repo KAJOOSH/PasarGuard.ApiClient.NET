@@ -1,27 +1,25 @@
-using System;
-using System.Collections.Generic;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
 namespace PasarGuard.ApiClient.Models;
 
-public sealed partial record BulkUsersFromTemplate
+public sealed record BulkUsersFromTemplate
 {
-    [JsonPropertyName(@"user_template_id")]
+    [JsonPropertyName("user_template_id")]
     public required long UserTemplateId { get; init; }
 
-    [JsonPropertyName(@"note")]
+    [JsonPropertyName("note")]
     public string? Note { get; init; }
 
-    [JsonPropertyName(@"username")]
+    [JsonPropertyName("username")]
     public string? Username { get; init; }
 
-    [JsonPropertyName(@"count")]
+    [JsonPropertyName("count")]
     public required long Count { get; init; }
 
-    [JsonPropertyName(@"strategy")]
+    [JsonPropertyName("strategy")]
     public UsernameGenerationStrategy Strategy { get; init; } = UsernameGenerationStrategy.Random;
 
-    [JsonPropertyName(@"start_number")]
+    [JsonPropertyName("start_number")]
     public long? StartNumber { get; init; }
 }

@@ -7,22 +7,22 @@ namespace PasarGuard.ApiClient.Models;
 [JsonConverter(typeof(PasarGuardEnumJsonConverter<ConfigFormat>))]
 public enum ConfigFormat
 {
-    [EnumMember(Value = @"links")]
+    [EnumMember(Value = "links")]
     Links,
-    [EnumMember(Value = @"links_base64")]
+    [EnumMember(Value = "links_base64")]
     LinksBase64,
-    [EnumMember(Value = @"xray")]
+    [EnumMember(Value = "xray")]
     Xray,
-    [EnumMember(Value = @"wireguard")]
+    [EnumMember(Value = "wireguard")]
     Wireguard,
-    [EnumMember(Value = @"sing_box")]
+    [EnumMember(Value = "sing_box")]
     SingBox,
-    [EnumMember(Value = @"clash")]
+    [EnumMember(Value = "clash")]
     Clash,
-    [EnumMember(Value = @"clash_meta")]
+    [EnumMember(Value = "clash_meta")]
     ClashMeta,
-    [EnumMember(Value = @"outline")]
+    [EnumMember(Value = "outline")]
     Outline,
-    [EnumMember(Value = @"block")]
+    [EnumMember(Value = "block")]
     Block
 }

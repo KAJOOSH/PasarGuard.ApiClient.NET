@@ -7,10 +7,10 @@ namespace PasarGuard.ApiClient.Models;
 [JsonConverter(typeof(PasarGuardEnumJsonConverter<XUDP>))]
 public enum XUDP
 {
-    [EnumMember(Value = @"reject")]
+    [EnumMember(Value = "reject")]
     Reject,
-    [EnumMember(Value = @"allow")]
+    [EnumMember(Value = "allow")]
     Allow,
-    [EnumMember(Value = @"skip")]
+    [EnumMember(Value = "skip")]
     Skip
 }

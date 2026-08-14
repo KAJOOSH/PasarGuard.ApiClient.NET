@@ -7,10 +7,10 @@ namespace PasarGuard.ApiClient.Models;
 [JsonConverter(typeof(PasarGuardEnumJsonConverter<GeoFilseRegion>))]
 public enum GeoFilseRegion
 {
-    [EnumMember(Value = @"iran")]
+    [EnumMember(Value = "iran")]
     Iran,
-    [EnumMember(Value = @"china")]
+    [EnumMember(Value = "china")]
     China,
-    [EnumMember(Value = @"russia")]
+    [EnumMember(Value = "russia")]
     Russia
 }

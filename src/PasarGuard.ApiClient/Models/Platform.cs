@@ -7,18 +7,18 @@ namespace PasarGuard.ApiClient.Models;
 [JsonConverter(typeof(PasarGuardEnumJsonConverter<Platform>))]
 public enum Platform
 {
-    [EnumMember(Value = @"android")]
+    [EnumMember(Value = "android")]
     Android,
-    [EnumMember(Value = @"ios")]
+    [EnumMember(Value = "ios")]
     Ios,
-    [EnumMember(Value = @"windows")]
+    [EnumMember(Value = "windows")]
     Windows,
-    [EnumMember(Value = @"macos")]
+    [EnumMember(Value = "macos")]
     Macos,
-    [EnumMember(Value = @"linux")]
+    [EnumMember(Value = "linux")]
     Linux,
-    [EnumMember(Value = @"appletv")]
+    [EnumMember(Value = "appletv")]
     Appletv,
-    [EnumMember(Value = @"androidtv")]
+    [EnumMember(Value = "androidtv")]
     Androidtv
 }

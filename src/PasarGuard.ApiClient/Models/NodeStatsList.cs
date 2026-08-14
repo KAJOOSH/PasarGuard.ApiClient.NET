@@ -1,21 +1,19 @@
-using System;
-using System.Collections.Generic;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
 namespace PasarGuard.ApiClient.Models;
 
-public sealed partial record NodeStatsList
+public sealed record NodeStatsList
 {
-    [JsonPropertyName(@"period")]
+    [JsonPropertyName("period")]
     public Period? Period { get; init; }
 
-    [JsonPropertyName(@"start")]
+    [JsonPropertyName("start")]
     public required DateTimeOffset Start { get; init; }
 
-    [JsonPropertyName(@"end")]
+    [JsonPropertyName("end")]
     public required DateTimeOffset End { get; init; }
 
-    [JsonPropertyName(@"stats")]
-    public required List<NodeStats> Stats { get; init; }
+    [JsonPropertyName("stats")]
+    public required IReadOnlyList<NodeStats> Stats { get; init; }
 }

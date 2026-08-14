@@ -7,8 +7,8 @@ namespace PasarGuard.ApiClient.Models;
 [JsonConverter(typeof(PasarGuardEnumJsonConverter<NodeConnectionType>))]
 public enum NodeConnectionType
 {
-    [EnumMember(Value = @"grpc")]
+    [EnumMember(Value = "grpc")]
     Grpc,
-    [EnumMember(Value = @"rest")]
+    [EnumMember(Value = "rest")]
     Rest
 }

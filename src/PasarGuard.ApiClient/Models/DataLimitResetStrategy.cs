@@ -7,14 +7,14 @@ namespace PasarGuard.ApiClient.Models;
 [JsonConverter(typeof(PasarGuardEnumJsonConverter<DataLimitResetStrategy>))]
 public enum DataLimitResetStrategy
 {
-    [EnumMember(Value = @"no_reset")]
+    [EnumMember(Value = "no_reset")]
     NoReset,
-    [EnumMember(Value = @"day")]
+    [EnumMember(Value = "day")]
     Day,
-    [EnumMember(Value = @"week")]
+    [EnumMember(Value = "week")]
     Week,
-    [EnumMember(Value = @"month")]
+    [EnumMember(Value = "month")]
     Month,
-    [EnumMember(Value = @"year")]
+    [EnumMember(Value = "year")]
     Year
 }

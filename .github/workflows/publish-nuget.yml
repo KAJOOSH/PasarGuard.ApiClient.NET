@@ -1,0 +1,145 @@
+name: Publish NuGet
+
+on:
+  push:
+    branches:
+      - master
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: publish-nuget
+  cancel-in-progress: false
+
+env:
+  DOTNET_CLI_TELEMETRY_OPTOUT: true
+  DOTNET_NOLOGO: true
+  PACKAGE_ID: PasarGuard.ApiClient
+  PACKAGE_PROJECT: src/PasarGuard.ApiClient/PasarGuard.ApiClient.csproj
+  PACKAGE_OUTPUT: artifacts
+
+jobs:
+  check-version:
+    name: Check published version
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    outputs:
+      version: ${{ steps.package-version.outputs.value }}
+      exists: ${{ steps.nuget-version.outputs.exists }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 10.0.x
+
+      - name: Read package version
+        id: package-version
+        shell: bash
+        run: |
+          version="$(dotnet msbuild "$PACKAGE_PROJECT" -getProperty:PackageVersion -nologo | tr -d '\r')"
+
+          if [[ ! "$version" =~ ^[0-9]+\.[0-9]+\.[0-9]+([-.][0-9A-Za-z.-]+)?$ ]]; then
+            echo "Invalid package version: $version" >&2
+            exit 1
+          fi
+
+          echo "value=$version" >> "$GITHUB_OUTPUT"
+
+      - name: Check NuGet.org
+        id: nuget-version
+        shell: bash
+        env:
+          PACKAGE_VERSION: ${{ steps.package-version.outputs.value }}
+        run: |
+          package_id="$(printf '%s' "$PACKAGE_ID" | tr '[:upper:]' '[:lower:]')"
+          package_version="$(printf '%s' "$PACKAGE_VERSION" | tr '[:upper:]' '[:lower:]')"
+          package_url="https://api.nuget.org/v3-flatcontainer/$package_id/$package_version/$package_id.$package_version.nupkg"
+          status="$(curl --silent --show-error --location --output /dev/null --write-out '%{http_code}' "$package_url")"
+
+          case "$status" in
+            200)
+              exists=true
+              ;;
+            404)
+              exists=false
+              ;;
+            *)
+              echo "NuGet.org returned HTTP $status while checking $PACKAGE_ID $PACKAGE_VERSION." >&2
+              exit 1
+              ;;
+          esac
+
+          echo "exists=$exists" >> "$GITHUB_OUTPUT"
+          echo "### NuGet version check" >> "$GITHUB_STEP_SUMMARY"
+          echo "- Package: \`$PACKAGE_ID\`" >> "$GITHUB_STEP_SUMMARY"
+          echo "- Current version: \`$PACKAGE_VERSION\`" >> "$GITHUB_STEP_SUMMARY"
+          echo "- Already published: \`$exists\`" >> "$GITHUB_STEP_SUMMARY"
+
+  publish:
+    name: Validate and publish
+    needs: check-version
+    if: ${{ needs.check-version.outputs.exists == 'false' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    environment: nuget
+    permissions:
+      contents: read
+      id-token: write
+    env:
+      PACKAGE_VERSION: ${{ needs.check-version.outputs.version }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 10.0.x
+
+      - name: Restore
+        run: dotnet restore PasarGuardApiClient.sln
+
+      - name: Verify formatting
+        run: dotnet format PasarGuardApiClient.sln --verify-no-changes --no-restore
+
+      - name: Build
+        run: dotnet build PasarGuardApiClient.sln --configuration Release --no-restore -p:Version="$PACKAGE_VERSION"
+
+      - name: Test
+        run: dotnet test PasarGuardApiClient.sln --configuration Release --no-build -p:Version="$PACKAGE_VERSION"
+
+      - name: Pack
+        run: dotnet pack "$PACKAGE_PROJECT" --configuration Release --no-build --output "$PACKAGE_OUTPUT" -p:PackageVersion="$PACKAGE_VERSION"
+
+      - name: Verify package files
+        shell: bash
+        run: |
+          test -f "$PACKAGE_OUTPUT/$PACKAGE_ID.$PACKAGE_VERSION.nupkg"
+          test -f "$PACKAGE_OUTPUT/$PACKAGE_ID.$PACKAGE_VERSION.snupkg"
+
+      - name: Upload package artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ env.PACKAGE_ID }}-${{ env.PACKAGE_VERSION }}
+          path: |
+            artifacts/*.nupkg
+            artifacts/*.snupkg
+          if-no-files-found: error
+
+      - name: NuGet login
+        id: login
+        uses: NuGet/login@v1
+        with:
+          user: ${{ secrets.NUGET_USER }}
+
+      - name: Publish to NuGet.org
+        env:
+          NUGET_API_KEY: ${{ steps.login.outputs.NUGET_API_KEY }}
+        run: dotnet nuget push "$PACKAGE_OUTPUT/$PACKAGE_ID.$PACKAGE_VERSION.nupkg" --api-key "$NUGET_API_KEY" --source https://api.nuget.org/v3/index.json --skip-duplicate

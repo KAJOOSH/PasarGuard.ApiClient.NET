@@ -1,24 +1,28 @@
-using System;
-using System.Collections.Generic;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
 namespace PasarGuard.ApiClient.Models;
 
-public sealed partial record XrayNoiseSettings
+public sealed record XrayNoiseSettings
 {
-    [JsonPropertyName(@"type")]
+    [JsonPropertyName("type")]
     public required string Type { get; init; }
 
-    [JsonPropertyName(@"packet")]
-    public required string Packet { get; init; }
+    [JsonPropertyName("packet")]
+    public JsonElement? Packet { get; init; }
 
-    [JsonPropertyName(@"delay")]
-    public required string Delay { get; init; }
+    [JsonPropertyName("delay")]
+    public JsonElement? Delay { get; init; }
 
-    [JsonPropertyName(@"apply_to")]
-    public string ApplyTo { get; init; } = @"ip";
+    [JsonPropertyName("apply_to")]
+    public string ApplyTo { get; init; } = "ip";
 
-    [JsonPropertyName(@"rand_range")]
+    [JsonPropertyName("rand")]
+    public JsonElement? Rand { get; init; }
+
+    [JsonPropertyName("randRange")]
     public string? RandRange { get; init; }
+
+    [JsonExtensionData]
+    public Dictionary<string, JsonElement> AdditionalProperties { get; init; } = [];
 }

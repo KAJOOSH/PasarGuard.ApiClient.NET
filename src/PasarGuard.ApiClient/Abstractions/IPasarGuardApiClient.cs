@@ -2,16 +2,20 @@ namespace PasarGuard.ApiClient.Abstractions;
 
 public interface IPasarGuardApiClient
 {
-    IDefaultClient Default { get; }
     IAdminClient Admin { get; }
-    ISystemClient System { get; }
-    ISettingsClient Settings { get; }
-    IGroupsClient Groups { get; }
-    ICoreClient Core { get; }
+    IAdminRolesClient AdminRoles { get; }
+    IApiKeysClient ApiKeys { get; }
     IClientTemplateClient ClientTemplate { get; }
+    ICoreClient Core { get; }
+    IDefaultClient Default { get; }
+    IGroupsClient Groups { get; }
     IHostClient Host { get; }
     INodeClient Node { get; }
-    IUserClient User { get; }
+    ISettingsClient Settings { get; }
+    ISetupClient Setup { get; }
     ISubscriptionClient Subscription { get; }
+    ISystemClient System { get; }
+    IUserClient User { get; }
+    IUserHwidClient UserHwid { get; }
     IUserTemplateClient UserTemplate { get; }
 }

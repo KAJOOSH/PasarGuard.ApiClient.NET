@@ -1,30 +1,34 @@
-using System;
-using System.Collections.Generic;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
 namespace PasarGuard.ApiClient.Models;
 
-public sealed partial record NotificationChannels
+public sealed record NotificationChannels
 {
-    [JsonPropertyName(@"admin")]
+    [JsonPropertyName("admin")]
     public NotificationChannel? Admin { get; init; }
 
-    [JsonPropertyName(@"core")]
+    [JsonPropertyName("admin_role")]
+    public NotificationChannel? AdminRole { get; init; }
+
+    [JsonPropertyName("core")]
     public NotificationChannel? Core { get; init; }
 
-    [JsonPropertyName(@"group")]
+    [JsonPropertyName("group")]
     public NotificationChannel? Group { get; init; }
 
-    [JsonPropertyName(@"host")]
+    [JsonPropertyName("host")]
     public NotificationChannel? Host { get; init; }
 
-    [JsonPropertyName(@"node")]
+    [JsonPropertyName("node")]
     public NotificationChannel? Node { get; init; }
 
-    [JsonPropertyName(@"user")]
+    [JsonPropertyName("user")]
     public NotificationChannel? User { get; init; }
 
-    [JsonPropertyName(@"user_template")]
+    [JsonPropertyName("user_template")]
     public NotificationChannel? UserTemplate { get; init; }
+
+    [JsonPropertyName("api_key")]
+    public NotificationChannel? ApiKey { get; init; }
 }

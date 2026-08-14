@@ -1,15 +1,13 @@
-using System;
-using System.Collections.Generic;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
 namespace PasarGuard.ApiClient.Models;
 
-public sealed partial record BulkUsersSetOwner
+public sealed record BulkUsersSetOwner
 {
-    [JsonPropertyName(@"ids")]
-    public List<long>? Ids { get; init; }
+    [JsonPropertyName("ids")]
+    public IReadOnlyList<long>? Ids { get; init; }
 
-    [JsonPropertyName(@"admin_username")]
+    [JsonPropertyName("admin_username")]
     public required string AdminUsername { get; init; }
 }

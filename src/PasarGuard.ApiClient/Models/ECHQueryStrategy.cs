@@ -7,10 +7,10 @@ namespace PasarGuard.ApiClient.Models;
 [JsonConverter(typeof(PasarGuardEnumJsonConverter<ECHQueryStrategy>))]
 public enum ECHQueryStrategy
 {
-    [EnumMember(Value = @"none")]
+    [EnumMember(Value = "none")]
     None,
-    [EnumMember(Value = @"half")]
+    [EnumMember(Value = "half")]
     Half,
-    [EnumMember(Value = @"full")]
+    [EnumMember(Value = "full")]
     Full
 }

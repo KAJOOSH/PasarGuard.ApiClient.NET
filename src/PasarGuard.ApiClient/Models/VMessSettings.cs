@@ -1,12 +1,10 @@
-using System;
-using System.Collections.Generic;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
 namespace PasarGuard.ApiClient.Models;
 
-public sealed partial record VMessSettings
+public sealed record VMessSettings
 {
-    [JsonPropertyName(@"id")]
-    public Guid? Id { get; init; }
+    [JsonPropertyName("id")]
+    public string? Id { get; init; }
 }

@@ -9,7 +9,9 @@
   </PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\src\PasarGuard.ApiClient\PasarGuard.ApiClient.csproj" />
-    <FrameworkReference Include="Microsoft.AspNetCore.App" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.EnvironmentVariables" Version="10.0.11" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="10.0.11" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="10.0.11" />
   </ItemGroup>
   <ItemGroup>
     <None Update="appsettings.json">

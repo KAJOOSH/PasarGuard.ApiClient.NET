@@ -7,8 +7,8 @@ namespace PasarGuard.ApiClient.Models;
 [JsonConverter(typeof(PasarGuardEnumJsonConverter<UserStatusCreate>))]
 public enum UserStatusCreate
 {
-    [EnumMember(Value = @"active")]
+    [EnumMember(Value = "active")]
     Active,
-    [EnumMember(Value = @"on_hold")]
+    [EnumMember(Value = "on_hold")]
     OnHold
 }

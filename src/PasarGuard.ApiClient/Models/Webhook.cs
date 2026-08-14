@@ -1,30 +1,28 @@
-using System;
-using System.Collections.Generic;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
 namespace PasarGuard.ApiClient.Models;
 
-public sealed partial record Webhook
+public sealed record Webhook
 {
-    [JsonPropertyName(@"enable")]
+    [JsonPropertyName("enable")]
     public bool Enable { get; init; } = false;
 
-    [JsonPropertyName(@"webhooks")]
-    public List<WebhookInfo> Webhooks { get; init; } = new();
+    [JsonPropertyName("webhooks")]
+    public IReadOnlyList<WebhookInfo> Webhooks { get; init; } = [];
 
-    [JsonPropertyName(@"days_left")]
-    public List<long> DaysLeft { get; init; } = new();
+    [JsonPropertyName("days_left")]
+    public IReadOnlyList<long> DaysLeft { get; init; } = [];
 
-    [JsonPropertyName(@"usage_percent")]
-    public List<long> UsagePercent { get; init; } = new();
+    [JsonPropertyName("usage_percent")]
+    public IReadOnlyList<long> UsagePercent { get; init; } = [];
 
-    [JsonPropertyName(@"timeout")]
+    [JsonPropertyName("timeout")]
     public required long Timeout { get; init; }
 
-    [JsonPropertyName(@"recurrent")]
+    [JsonPropertyName("recurrent")]
     public required long Recurrent { get; init; }
 
-    [JsonPropertyName(@"proxy_url")]
+    [JsonPropertyName("proxy_url")]
     public string? ProxyUrl { get; init; }
 }

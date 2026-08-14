@@ -1,173 +1,183 @@
-# PasarGuard.ApiClient.NET
+# PasarGuard.ApiClient
 
-A modern, production-ready .NET client SDK for the PasarGuard API.
+[![NuGet](https://img.shields.io/nuget/v/PasarGuard.ApiClient.svg)](https://www.nuget.org/packages/PasarGuard.ApiClient)
+[![NuGet downloads](https://img.shields.io/nuget/dt/PasarGuard.ApiClient.svg)](https://www.nuget.org/packages/PasarGuard.ApiClient)
+[![CI](https://github.com/KAJOOSH/PasarGuard.ApiClient.NET/actions/workflows/ci.yml/badge.svg)](https://github.com/KAJOOSH/PasarGuard.ApiClient.NET/actions/workflows/ci.yml)
+[![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 
-PasarGuard.ApiClient.NET generates clean, scalable, and fully asynchronous C# API clients from PasarGuard API specifications with support for:
+PasarGuard.ApiClient is a strongly typed, asynchronous .NET client for PasarGuardAPI. It provides dependency-injection integration, bearer-token authentication, typed request and response models, structured error handling, response headers, and cancellation support across the complete PasarGuardAPI `5.2.1` surface.
 
-* .NET 10
-* HttpClientFactory
-* Dependency Injection
-* Bearer Token Authentication
-* Result Wrappers
-* Error Handling
-* ILogger
-* CancellationToken
-* Nullable Reference Types
-* Clean Architecture
-* Typed API Clients
+## Requirements
 
----
+- .NET 10 or later
+- A PasarGuardAPI `5.2.1` instance
 
-# Features
+## Installation
 
-* Strongly typed request/response models
-* Async-first architecture
-* Automatic HttpClient configuration
-* Production-ready folder structure
-* Configurable authentication
-* Built-in error handling
-* Minimal API / Console examples
-* Clean and maintainable generated code
+Install the package from [NuGet.org](https://www.nuget.org/packages/PasarGuard.ApiClient):
 
----
-
-# Installation
-
-Clone repository:
-
-```bash
-git clone https://github.com/KAJOOSH/PasarGuard.ApiClient.NET.git
+```shell
+dotnet add package PasarGuard.ApiClient
 ```
 
-Restore packages:
+Or add it directly to your project:
 
-```bash
-dotnet restore
+```xml
+<PackageReference Include="PasarGuard.ApiClient" Version="5.2.1" />
 ```
 
-Build solution:
+## Configuration
 
-```bash
-dotnet build
-```
-
----
-
-# Configuration
-
-appsettings.json
+Add the client settings to `appsettings.json`:
 
 ```json
 {
-  "PasarGuardApi": {
-    "BaseUrl": "https://api.example.com",
-    "TimeoutSeconds": 30,
-    "AuthorizationScheme": "Bearer",
-    "BearerToken": ""
+  "PasarGuardClient": {
+    "BaseUrl": "https://pasarguard.example:8000",
+    "TimeoutSeconds": 100,
+    "BearerToken": "",
+    "AuthorizationScheme": "Bearer"
   }
 }
 ```
 
----
-
-# Dependency Injection
+Register the client with the application configuration:
 
 ```csharp
-builder.Services.AddPasarGuardApiClient(
-    builder.Configuration.GetSection("PasarGuardApi")
-);
+using PasarGuard.ApiClient.DependencyInjection;
+
+builder.Services.AddPasarGuardApiClient(builder.Configuration);
 ```
 
----
-
-# Authentication
-
-Retrieve token:
+Configuration can also be supplied directly:
 
 ```csharp
-var tokenResult = await client.Admin.AdminTokenAsync(
-    new BodyAdminTokenApiAdminTokenPost
-    {
-        Username = "admin",
-        Password = "password"
-    }
-);
+builder.Services.AddPasarGuardApiClient(options =>
+{
+    options.BaseUrl = "https://pasarguard.example:8000";
+    options.TimeoutSeconds = 100;
+    options.BearerToken = accessToken;
+});
 ```
 
-Set token dynamically:
+## Authentication
+
+Resolve the aggregate client and shared token provider:
 
 ```csharp
+using PasarGuard.ApiClient.Abstractions;
+using PasarGuard.ApiClient.Authentication;
+
+var client = serviceProvider.GetRequiredService<IPasarGuardApiClient>();
+var tokenProvider = serviceProvider.GetRequiredService<MutableAccessTokenProvider>();
+```
+
+Obtain an admin token and apply it to subsequent requests:
+
+```csharp
+using PasarGuard.ApiClient.Models;
+
+var tokenResult = await client.Admin.AdminTokenAsync(new BodyAdminToken
+{
+    Username = username,
+    Password = password
+});
+
+if (!tokenResult.IsSuccess || tokenResult.Value is null)
+{
+    throw new InvalidOperationException(tokenResult.Error?.Message);
+}
+
 tokenProvider.SetToken(tokenResult.Value.AccessToken);
 ```
 
----
+For applications that already manage credentials, register a custom `IAccessTokenProvider` before calling `AddPasarGuardApiClient`.
 
-# Usage Example
+## Usage
+
+All operations are asynchronous and return `ApiResult` or `ApiResult<T>`.
 
 ```csharp
-var users = await client.User.GetUsersAsync(
-    offset: 0,
-    limit: 20
-);
+var result = await client.User.GetUsersAsync(limit: 20, cancellationToken: cancellationToken);
 
-if (users.IsSuccess)
+if (result.IsSuccess)
 {
-    foreach (var user in users.Value?.Users ?? [])
+    foreach (var user in result.Value?.Users ?? [])
     {
         Console.WriteLine(user.Username);
     }
 }
 else
 {
-    Console.WriteLine(users.Error?.Message);
+    Console.WriteLine($"Request failed with status {(int)result.StatusCode}: {result.Error?.Message}");
 }
 ```
 
----
+Create an API key:
 
-# Project Structure
-
-```text
-src/
- ├── PasarGuard.ApiClient/
- │    ├── Authentication/
- │    ├── Clients/
- │    ├── Contracts/
- │    ├── Models/
- │    ├── Options/
- │    ├── Services/
- │    ├── Wrappers/
- │    └── Extensions/
-
-samples/
- └── PasarGuard.ApiClient.ConsoleSample/
+```csharp
+var result = await client.ApiKeys.CreateApiKeyAsync(new APIKeyCreate
+{
+    Name = "automation",
+    InheritPermissions = true
+}, cancellationToken);
 ```
 
----
+Read response headers:
 
-# Technologies
+```csharp
+var result = await client.Subscription.UserSubscriptionHeadersAsync(
+    token,
+    cancellationToken: cancellationToken);
 
-* .NET 10
-* C#
-* System.Text.Json
-* Microsoft.Extensions.Http
-* Microsoft.Extensions.Logging
+if (result.Headers.TryGetValue("subscription-userinfo", out var values))
+{
+    Console.WriteLine(values[0]);
+}
+```
 
----
+Each result exposes:
 
-# Goals
+- `IsSuccess` for success detection
+- `StatusCode` for the HTTP status
+- `Value` for typed response data
+- `Error` for HTTP, transport, and serialization failures
+- `Headers` for response and content headers
 
-PasarGuard.ApiClient.NET focuses on generating SDKs that are:
+## API areas
 
-* Clean
-* Maintainable
-* Extensible
-* Production-ready
-* Modern
-* Developer-friendly
+The aggregate `IPasarGuardApiClient` provides access to the following clients:
 
----
+| Property | Area |
+| --- | --- |
+| `Admin` | Admin authentication and management |
+| `AdminRoles` | Admin roles and permissions |
+| `ApiKeys` | API key lifecycle |
+| `ClientTemplate` | Client templates |
+| `Core` | Core configurations and Reality scanning |
+| `Default` | Root and health endpoints |
+| `Groups` | User groups |
+| `Host` | Hosts |
+| `Node` | Nodes, status, latency, and metrics |
+| `Settings` | Server settings |
+| `Setup` | Owner setup and upgrade |
+| `Subscription` | Subscription output and headers |
+| `System` | System, resource, and WireGuard statistics |
+| `User` | Users and bulk operations |
+| `UserHwid` | User HWID management |
+| `UserTemplate` | User templates |
 
-# License
+Individual clients such as `IUserClient` or `INodeClient` can also be resolved directly through dependency injection.
 
-MIT License
+## API reference
+
+- [PasarGuardAPI documentation](https://65.109.216.65:8000/docs)
+- [PasarGuardAPI OpenAPI document](https://65.109.216.65:8000/openapi.json)
+
+## Versioning
+
+Package versions follow [Semantic Versioning](https://semver.org/). The supported PasarGuardAPI version is stated in the package description and release notes.
+
+## License
+
+PasarGuard.ApiClient is available under the [MIT License](LICENSE).

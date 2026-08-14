@@ -1,15 +1,13 @@
-using System;
-using System.Collections.Generic;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
 namespace PasarGuard.ApiClient.Models;
 
-public sealed partial record CoresSimpleResponse
+public sealed record CoresSimpleResponse
 {
-    [JsonPropertyName(@"cores")]
-    public required List<CoreSimple> Cores { get; init; }
+    [JsonPropertyName("cores")]
+    public required IReadOnlyList<CoreSimple> Cores { get; init; }
 
-    [JsonPropertyName(@"total")]
+    [JsonPropertyName("total")]
     public required long Total { get; init; }
 }

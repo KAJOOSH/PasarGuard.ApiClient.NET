@@ -13,9 +13,11 @@ public static class PasarGuardJsonSerializerOptions
         var options = new JsonSerializerOptions(JsonSerializerDefaults.Web)
         {
             PropertyNameCaseInsensitive = true,
-            NumberHandling = JsonNumberHandling.AllowReadingFromString
+            NumberHandling = JsonNumberHandling.AllowReadingFromString,
+            DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull
         };
 
+        options.MakeReadOnly(populateMissingResolver: true);
         return options;
     }
 }

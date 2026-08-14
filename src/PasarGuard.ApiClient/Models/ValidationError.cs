@@ -1,24 +1,22 @@
-using System;
-using System.Collections.Generic;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
 namespace PasarGuard.ApiClient.Models;
 
-public sealed partial record ValidationError
+public sealed record ValidationError
 {
-    [JsonPropertyName(@"loc")]
-    public required List<object> Loc { get; init; }
+    [JsonPropertyName("loc")]
+    public required IReadOnlyList<JsonElement> Loc { get; init; }
 
-    [JsonPropertyName(@"msg")]
+    [JsonPropertyName("msg")]
     public required string Msg { get; init; }
 
-    [JsonPropertyName(@"type")]
+    [JsonPropertyName("type")]
     public required string Type { get; init; }
 
-    [JsonPropertyName(@"input")]
-    public object? Input { get; init; }
+    [JsonPropertyName("input")]
+    public JsonElement? Input { get; init; }
 
-    [JsonPropertyName(@"ctx")]
-    public Dictionary<string, object?>? Ctx { get; init; }
+    [JsonPropertyName("ctx")]
+    public JsonElement? Ctx { get; init; }
 }

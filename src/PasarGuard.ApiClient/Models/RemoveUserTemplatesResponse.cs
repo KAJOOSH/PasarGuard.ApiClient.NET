@@ -1,15 +1,13 @@
-using System;
-using System.Collections.Generic;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
 namespace PasarGuard.ApiClient.Models;
 
-public sealed partial record RemoveUserTemplatesResponse
+public sealed record RemoveUserTemplatesResponse
 {
-    [JsonPropertyName(@"templates")]
-    public required List<string> Templates { get; init; }
+    [JsonPropertyName("templates")]
+    public required IReadOnlyList<string> Templates { get; init; }
 
-    [JsonPropertyName(@"count")]
+    [JsonPropertyName("count")]
     public required long Count { get; init; }
 }

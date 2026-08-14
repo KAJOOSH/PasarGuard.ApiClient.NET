@@ -4,32 +4,55 @@ namespace PasarGuard.ApiClient.Clients;
 
 public sealed class PasarGuardApiClient : IPasarGuardApiClient
 {
-    public PasarGuardApiClient(IDefaultClient defaultValue, IAdminClient admin, ISystemClient system, ISettingsClient settings, IGroupsClient groups, ICoreClient core, IClientTemplateClient clientTemplate, IHostClient host, INodeClient node, IUserClient user, ISubscriptionClient subscription, IUserTemplateClient userTemplate)
+    public PasarGuardApiClient(IAdminClient admin, IAdminRolesClient adminRoles, IApiKeysClient apiKeys, IClientTemplateClient clientTemplate, ICoreClient core, IDefaultClient defaultValue, IGroupsClient groups, IHostClient host, INodeClient node, ISettingsClient settings, ISetupClient setup, ISubscriptionClient subscription, ISystemClient system, IUserClient user, IUserHwidClient userHwid, IUserTemplateClient userTemplate)
     {
-        Default = defaultValue;
         Admin = admin;
-        System = system;
-        Settings = settings;
-        Groups = groups;
-        Core = core;
+        AdminRoles = adminRoles;
+        ApiKeys = apiKeys;
         ClientTemplate = clientTemplate;
+        Core = core;
+        Default = defaultValue;
+        Groups = groups;
         Host = host;
         Node = node;
-        User = user;
+        Settings = settings;
+        Setup = setup;
         Subscription = subscription;
+        System = system;
+        User = user;
+        UserHwid = userHwid;
         UserTemplate = userTemplate;
     }
 
-    public IDefaultClient Default { get; }
     public IAdminClient Admin { get; }
-    public ISystemClient System { get; }
-    public ISettingsClient Settings { get; }
-    public IGroupsClient Groups { get; }
-    public ICoreClient Core { get; }
+
+    public IAdminRolesClient AdminRoles { get; }
+
+    public IApiKeysClient ApiKeys { get; }
+
     public IClientTemplateClient ClientTemplate { get; }
+
+    public ICoreClient Core { get; }
+
+    public IDefaultClient Default { get; }
+
+    public IGroupsClient Groups { get; }
+
     public IHostClient Host { get; }
+
     public INodeClient Node { get; }
-    public IUserClient User { get; }
+
+    public ISettingsClient Settings { get; }
+
+    public ISetupClient Setup { get; }
+
     public ISubscriptionClient Subscription { get; }
+
+    public ISystemClient System { get; }
+
+    public IUserClient User { get; }
+
+    public IUserHwidClient UserHwid { get; }
+
     public IUserTemplateClient UserTemplate { get; }
 }

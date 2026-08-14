@@ -32,14 +32,16 @@ else
     Console.WriteLine($"Error: {health.Error?.Message}");
 }
 
-var tokenResult = await client.Admin.AdminTokenAsync(new BodyAdminTokenApiAdminTokenPost
+var tokenResult = await client.Admin.AdminTokenAsync(new BodyAdminToken
 {
     Username = "",
     Password = ""
 });
 
 if (!tokenResult.IsSuccess || tokenResult.Value is null)
+{
     return;
+}
 
 tokenProvider.SetToken(tokenResult.Value.AccessToken);
 

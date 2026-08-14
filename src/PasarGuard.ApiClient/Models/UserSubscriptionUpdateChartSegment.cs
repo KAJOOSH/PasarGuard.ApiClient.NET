@@ -1,18 +1,16 @@
-using System;
-using System.Collections.Generic;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
 namespace PasarGuard.ApiClient.Models;
 
-public sealed partial record UserSubscriptionUpdateChartSegment
+public sealed record UserSubscriptionUpdateChartSegment
 {
-    [JsonPropertyName(@"name")]
+    [JsonPropertyName("name")]
     public required string Name { get; init; }
 
-    [JsonPropertyName(@"count")]
+    [JsonPropertyName("count")]
     public required long Count { get; init; }
 
-    [JsonPropertyName(@"percentage")]
+    [JsonPropertyName("percentage")]
     public required double Percentage { get; init; }
 }

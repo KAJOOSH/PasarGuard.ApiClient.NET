@@ -7,14 +7,14 @@ namespace PasarGuard.ApiClient.Models;
 [JsonConverter(typeof(PasarGuardEnumJsonConverter<ClientTemplateType>))]
 public enum ClientTemplateType
 {
-    [EnumMember(Value = @"clash_subscription")]
+    [EnumMember(Value = "clash_subscription")]
     ClashSubscription,
-    [EnumMember(Value = @"xray_subscription")]
+    [EnumMember(Value = "xray_subscription")]
     XraySubscription,
-    [EnumMember(Value = @"singbox_subscription")]
+    [EnumMember(Value = "singbox_subscription")]
     SingboxSubscription,
-    [EnumMember(Value = @"user_agent")]
+    [EnumMember(Value = "user_agent")]
     UserAgent,
-    [EnumMember(Value = @"grpc_user_agent")]
+    [EnumMember(Value = "grpc_user_agent")]
     GrpcUserAgent
 }

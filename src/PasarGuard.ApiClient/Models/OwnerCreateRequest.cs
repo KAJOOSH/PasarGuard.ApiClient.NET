@@ -1,0 +1,16 @@
+using System.Text.Json;
+using System.Text.Json.Serialization;
+
+namespace PasarGuard.ApiClient.Models;
+
+public sealed record OwnerCreateRequest
+{
+    [JsonPropertyName("key")]
+    public required string Key { get; init; }
+
+    [JsonPropertyName("password")]
+    public required string Password { get; init; }
+
+    [JsonPropertyName("username")]
+    public required string Username { get; init; }
+}

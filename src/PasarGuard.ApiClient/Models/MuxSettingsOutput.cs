@@ -1,18 +1,16 @@
-using System;
-using System.Collections.Generic;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
 namespace PasarGuard.ApiClient.Models;
 
-public sealed partial record MuxSettingsOutput
+public sealed record MuxsettingsOutput
 {
-    [JsonPropertyName(@"sing_box")]
+    [JsonPropertyName("sing_box")]
     public SingBoxMuxSettings? SingBox { get; init; }
 
-    [JsonPropertyName(@"clash")]
+    [JsonPropertyName("clash")]
     public ClashMuxSettings? Clash { get; init; }
 
-    [JsonPropertyName(@"xray")]
-    public XrayMuxSettingsOutput? Xray { get; init; }
+    [JsonPropertyName("xray")]
+    public XraymuxsettingsOutput? Xray { get; init; }
 }

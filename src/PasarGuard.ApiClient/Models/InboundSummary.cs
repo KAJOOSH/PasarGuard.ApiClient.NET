@@ -1,18 +1,16 @@
-using System;
-using System.Collections.Generic;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
 namespace PasarGuard.ApiClient.Models;
 
-public sealed partial record InboundSummary
+public sealed record InboundSummary
 {
-    [JsonPropertyName(@"tag")]
+    [JsonPropertyName("tag")]
     public required string Tag { get; init; }
 
-    [JsonPropertyName(@"protocol")]
+    [JsonPropertyName("protocol")]
     public required string Protocol { get; init; }
 
-    [JsonPropertyName(@"network")]
+    [JsonPropertyName("network")]
     public string? Network { get; init; }
 }

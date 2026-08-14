@@ -1,48 +1,52 @@
-using System;
-using System.Collections.Generic;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
 namespace PasarGuard.ApiClient.Models;
 
-public sealed partial record AdminCreate
+public sealed record AdminCreate
 {
-    [JsonPropertyName(@"password")]
+    [JsonPropertyName("password")]
     public required string Password { get; init; }
 
-    [JsonPropertyName(@"is_sudo")]
-    public required bool IsSudo { get; init; }
-
-    [JsonPropertyName(@"telegram_id")]
+    [JsonPropertyName("telegram_id")]
     public long? TelegramId { get; init; }
 
-    [JsonPropertyName(@"discord_webhook")]
+    [JsonPropertyName("discord_webhook")]
     public string? DiscordWebhook { get; init; }
 
-    [JsonPropertyName(@"discord_id")]
-    public long? DiscordId { get; init; }
+    [JsonPropertyName("status")]
+    public AdminStatus? Status { get; init; }
 
-    [JsonPropertyName(@"is_disabled")]
-    public bool? IsDisabled { get; init; }
+    [JsonPropertyName("data_limit")]
+    public long? DataLimit { get; init; }
 
-    [JsonPropertyName(@"sub_template")]
+    [JsonPropertyName("sub_template")]
     public string? SubTemplate { get; init; }
 
-    [JsonPropertyName(@"sub_domain")]
+    [JsonPropertyName("sub_domain")]
     public string? SubDomain { get; init; }
 
-    [JsonPropertyName(@"profile_title")]
+    [JsonPropertyName("profile_title")]
     public string? ProfileTitle { get; init; }
 
-    [JsonPropertyName(@"support_url")]
+    [JsonPropertyName("support_url")]
     public string? SupportUrl { get; init; }
 
-    [JsonPropertyName(@"note")]
+    [JsonPropertyName("custom_variables")]
+    public IReadOnlyList<CustomVariable>? CustomVariables { get; init; }
+
+    [JsonPropertyName("note")]
     public string? Note { get; init; }
 
-    [JsonPropertyName(@"notification_enable")]
+    [JsonPropertyName("notification_enable")]
     public UserNotificationEnable? NotificationEnable { get; init; }
 
-    [JsonPropertyName(@"username")]
+    [JsonPropertyName("role_id")]
+    public required long RoleId { get; init; }
+
+    [JsonPropertyName("permission_overrides")]
+    public RoleLimits? PermissionOverrides { get; init; }
+
+    [JsonPropertyName("username")]
     public required string Username { get; init; }
 }

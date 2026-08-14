@@ -1,30 +1,28 @@
-using System;
-using System.Collections.Generic;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
 namespace PasarGuard.ApiClient.Models;
 
-public sealed partial record KCPSettings
+public sealed record KCPSettings
 {
-    [JsonPropertyName(@"mtu")]
+    [JsonPropertyName("mtu")]
     public long? Mtu { get; init; }
 
-    [JsonPropertyName(@"tti")]
+    [JsonPropertyName("tti")]
     public long? Tti { get; init; }
 
-    [JsonPropertyName(@"uplink_capacity")]
+    [JsonPropertyName("uplink_capacity")]
     public long? UplinkCapacity { get; init; }
 
-    [JsonPropertyName(@"downlink_capacity")]
+    [JsonPropertyName("downlink_capacity")]
     public long? DownlinkCapacity { get; init; }
 
-    [JsonPropertyName(@"congestion")]
+    [JsonPropertyName("congestion")]
     public bool? Congestion { get; init; }
 
-    [JsonPropertyName(@"read_buffer_size")]
+    [JsonPropertyName("read_buffer_size")]
     public long? ReadBufferSize { get; init; }
 
-    [JsonPropertyName(@"write_buffer_size")]
+    [JsonPropertyName("write_buffer_size")]
     public long? WriteBufferSize { get; init; }
 }

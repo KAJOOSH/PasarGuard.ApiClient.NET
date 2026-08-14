@@ -7,10 +7,10 @@ namespace PasarGuard.ApiClient.Models;
 [JsonConverter(typeof(PasarGuardEnumJsonConverter<MultiplexProtocol>))]
 public enum MultiplexProtocol
 {
-    [EnumMember(Value = @"smux")]
+    [EnumMember(Value = "smux")]
     Smux,
-    [EnumMember(Value = @"yamux")]
+    [EnumMember(Value = "yamux")]
     Yamux,
-    [EnumMember(Value = @"h2mux")]
-    H2Mux
+    [EnumMember(Value = "h2mux")]
+    H2mux
 }

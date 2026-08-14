@@ -1,12 +1,10 @@
-using System;
-using System.Collections.Generic;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
 namespace PasarGuard.ApiClient.Models;
 
-public sealed partial record HTTPValidationError
+public sealed record HTTPValidationError
 {
-    [JsonPropertyName(@"detail")]
-    public List<ValidationError>? Detail { get; init; }
+    [JsonPropertyName("detail")]
+    public IReadOnlyList<ValidationError>? Detail { get; init; }
 }

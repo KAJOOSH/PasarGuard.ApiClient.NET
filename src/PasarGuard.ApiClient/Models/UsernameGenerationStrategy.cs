@@ -7,8 +7,8 @@ namespace PasarGuard.ApiClient.Models;
 [JsonConverter(typeof(PasarGuardEnumJsonConverter<UsernameGenerationStrategy>))]
 public enum UsernameGenerationStrategy
 {
-    [EnumMember(Value = @"random")]
+    [EnumMember(Value = "random")]
     Random,
-    [EnumMember(Value = @"sequence")]
+    [EnumMember(Value = "sequence")]
     Sequence
 }

@@ -7,12 +7,12 @@ namespace PasarGuard.ApiClient.Models;
 [JsonConverter(typeof(PasarGuardEnumJsonConverter<Language>))]
 public enum Language
 {
-    [EnumMember(Value = @"fa")]
+    [EnumMember(Value = "fa")]
     Fa,
-    [EnumMember(Value = @"en")]
+    [EnumMember(Value = "en")]
     En,
-    [EnumMember(Value = @"ru")]
+    [EnumMember(Value = "ru")]
     Ru,
-    [EnumMember(Value = @"zh")]
+    [EnumMember(Value = "zh")]
     Zh
 }

@@ -1,8 +1,4 @@
-using System;
-using System.Collections.Generic;
 using System.Text.Json;
-using System.Threading;
-using System.Threading.Tasks;
 using PasarGuard.ApiClient.Core;
 using PasarGuard.ApiClient.Models;
 
@@ -10,9 +6,12 @@ namespace PasarGuard.ApiClient.Abstractions;
 
 public interface ISettingsClient
 {
-    Task<ApiResult<SettingsSchemaOutput>> GetSettingsAsync(CancellationToken cancellationToken = default);
+    [ApiEndpoint("GET", "/api/settings", "get_settings")]
+    Task<ApiResult<SettingsSchema>> GetSettingsAsync(CancellationToken cancellationToken = default);
 
-    Task<ApiResult<SettingsSchemaOutput>> ModifySettingsAsync(SettingsSchemaInput request, CancellationToken cancellationToken = default);
+    [ApiEndpoint("PUT", "/api/settings", "modify_settings")]
+    Task<ApiResult<SettingsSchema>> ModifySettingsAsync(SettingsSchema request, CancellationToken cancellationToken = default);
 
+    [ApiEndpoint("GET", "/api/settings/general", "get_general_settings")]
     Task<ApiResult<General>> GetGeneralSettingsAsync(CancellationToken cancellationToken = default);
 }

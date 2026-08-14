@@ -1,15 +1,13 @@
-using System;
-using System.Collections.Generic;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
 namespace PasarGuard.ApiClient.Models;
 
-public sealed partial record AdminSimple
+public sealed record AdminSimple
 {
-    [JsonPropertyName(@"id")]
+    [JsonPropertyName("id")]
     public required long Id { get; init; }
 
-    [JsonPropertyName(@"username")]
+    [JsonPropertyName("username")]
     public required string Username { get; init; }
 }

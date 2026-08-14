@@ -7,12 +7,12 @@ namespace PasarGuard.ApiClient.Models;
 [JsonConverter(typeof(PasarGuardEnumJsonConverter<XHttpModes>))]
 public enum XHttpModes
 {
-    [EnumMember(Value = @"auto")]
+    [EnumMember(Value = "auto")]
     Auto,
-    [EnumMember(Value = @"packet-up")]
+    [EnumMember(Value = "packet-up")]
     PacketUp,
-    [EnumMember(Value = @"stream-up")]
+    [EnumMember(Value = "stream-up")]
     StreamUp,
-    [EnumMember(Value = @"stream-one")]
+    [EnumMember(Value = "stream-one")]
     StreamOne
 }

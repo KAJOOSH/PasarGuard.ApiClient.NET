@@ -7,30 +7,30 @@ namespace PasarGuard.ApiClient.Models;
 [JsonConverter(typeof(PasarGuardEnumJsonConverter<ProxyHostFingerprint>))]
 public enum ProxyHostFingerprint
 {
-    [EnumMember(Value = @"")]
+    [EnumMember(Value = "")]
     Empty,
-    [EnumMember(Value = @"chrome")]
+    [EnumMember(Value = "chrome")]
     Chrome,
-    [EnumMember(Value = @"firefox")]
+    [EnumMember(Value = "firefox")]
     Firefox,
-    [EnumMember(Value = @"safari")]
+    [EnumMember(Value = "safari")]
     Safari,
-    [EnumMember(Value = @"ios")]
+    [EnumMember(Value = "ios")]
     Ios,
-    [EnumMember(Value = @"android")]
+    [EnumMember(Value = "android")]
     Android,
-    [EnumMember(Value = @"edge")]
+    [EnumMember(Value = "edge")]
     Edge,
-    [EnumMember(Value = @"360")]
+    [EnumMember(Value = "360")]
     Value360,
-    [EnumMember(Value = @"qq")]
+    [EnumMember(Value = "qq")]
     Qq,
-    [EnumMember(Value = @"random")]
+    [EnumMember(Value = "random")]
     Random,
-    [EnumMember(Value = @"randomized")]
+    [EnumMember(Value = "randomized")]
     Randomized,
-    [EnumMember(Value = @"randomizednoalpn")]
+    [EnumMember(Value = "randomizednoalpn")]
     Randomizednoalpn,
-    [EnumMember(Value = @"unsafe")]
+    [EnumMember(Value = "unsafe")]
     Unsafe
 }

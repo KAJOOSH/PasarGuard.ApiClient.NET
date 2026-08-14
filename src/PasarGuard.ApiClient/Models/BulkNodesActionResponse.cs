@@ -1,15 +1,13 @@
-using System;
-using System.Collections.Generic;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
 namespace PasarGuard.ApiClient.Models;
 
-public sealed partial record BulkNodesActionResponse
+public sealed record BulkNodesActionResponse
 {
-    [JsonPropertyName(@"nodes")]
-    public required List<string> Nodes { get; init; }
+    [JsonPropertyName("nodes")]
+    public required IReadOnlyList<string> Nodes { get; init; }
 
-    [JsonPropertyName(@"count")]
+    [JsonPropertyName("count")]
     public required long Count { get; init; }
 }

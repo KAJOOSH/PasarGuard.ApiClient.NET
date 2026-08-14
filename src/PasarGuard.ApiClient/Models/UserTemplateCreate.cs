@@ -1,45 +1,46 @@
-using System;
-using System.Collections.Generic;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
 namespace PasarGuard.ApiClient.Models;
 
-public sealed partial record UserTemplateCreate
+public sealed record UserTemplateCreate
 {
-    [JsonPropertyName(@"name")]
+    [JsonPropertyName("name")]
     public string? Name { get; init; }
 
-    [JsonPropertyName(@"data_limit")]
+    [JsonPropertyName("data_limit")]
     public long? DataLimit { get; init; }
 
-    [JsonPropertyName(@"expire_duration")]
+    [JsonPropertyName("hwid_limit")]
+    public long? HwidLimit { get; init; }
+
+    [JsonPropertyName("expire_duration")]
     public long? ExpireDuration { get; init; }
 
-    [JsonPropertyName(@"username_prefix")]
+    [JsonPropertyName("username_prefix")]
     public string? UsernamePrefix { get; init; }
 
-    [JsonPropertyName(@"username_suffix")]
+    [JsonPropertyName("username_suffix")]
     public string? UsernameSuffix { get; init; }
 
-    [JsonPropertyName(@"group_ids")]
-    public required List<long> GroupIds { get; init; }
+    [JsonPropertyName("group_ids")]
+    public required IReadOnlyList<long> GroupIds { get; init; }
 
-    [JsonPropertyName(@"extra_settings")]
+    [JsonPropertyName("extra_settings")]
     public ExtraSettings? ExtraSettings { get; init; }
 
-    [JsonPropertyName(@"status")]
+    [JsonPropertyName("status")]
     public UserStatusCreate? Status { get; init; }
 
-    [JsonPropertyName(@"reset_usages")]
+    [JsonPropertyName("reset_usages")]
     public bool? ResetUsages { get; init; }
 
-    [JsonPropertyName(@"on_hold_timeout")]
+    [JsonPropertyName("on_hold_timeout")]
     public long? OnHoldTimeout { get; init; }
 
-    [JsonPropertyName(@"data_limit_reset_strategy")]
+    [JsonPropertyName("data_limit_reset_strategy")]
     public DataLimitResetStrategy DataLimitResetStrategy { get; init; } = DataLimitResetStrategy.NoReset;
 
-    [JsonPropertyName(@"is_disabled")]
+    [JsonPropertyName("is_disabled")]
     public bool? IsDisabled { get; init; }
 }

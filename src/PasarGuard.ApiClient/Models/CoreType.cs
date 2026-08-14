@@ -7,12 +7,12 @@ namespace PasarGuard.ApiClient.Models;
 [JsonConverter(typeof(PasarGuardEnumJsonConverter<CoreType>))]
 public enum CoreType
 {
-    [EnumMember(Value = @"xray")]
+    [EnumMember(Value = "xray")]
     Xray,
-    [EnumMember(Value = @"wg")]
+    [EnumMember(Value = "wg")]
     Wg,
-    [EnumMember(Value = @"mtproto")]
+    [EnumMember(Value = "mtproto")]
     Mtproto,
-    [EnumMember(Value = @"singbox")]
+    [EnumMember(Value = "singbox")]
     Singbox
 }

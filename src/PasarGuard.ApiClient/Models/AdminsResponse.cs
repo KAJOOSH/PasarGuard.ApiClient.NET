@@ -1,21 +1,22 @@
-using System;
-using System.Collections.Generic;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
 namespace PasarGuard.ApiClient.Models;
 
-public sealed partial record AdminsResponse
+public sealed record AdminsResponse
 {
-    [JsonPropertyName(@"admins")]
-    public required List<AdminDetails> Admins { get; init; }
+    [JsonPropertyName("admins")]
+    public required IReadOnlyList<AdminDetails> Admins { get; init; }
 
-    [JsonPropertyName(@"total")]
+    [JsonPropertyName("total")]
     public required long Total { get; init; }
 
-    [JsonPropertyName(@"active")]
+    [JsonPropertyName("active")]
     public required long Active { get; init; }
 
-    [JsonPropertyName(@"disabled")]
+    [JsonPropertyName("disabled")]
     public required long Disabled { get; init; }
+
+    [JsonPropertyName("limited")]
+    public required long Limited { get; init; }
 }

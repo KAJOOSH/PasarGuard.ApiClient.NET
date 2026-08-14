@@ -1,0 +1,64 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  DOTNET_CLI_TELEMETRY_OPTOUT: true
+  DOTNET_NOLOGO: true
+  PACKAGE_PROJECT: src/PasarGuard.ApiClient/PasarGuard.ApiClient.csproj
+  PACKAGE_OUTPUT: artifacts
+
+jobs:
+  build-test-pack:
+    name: Build, test, and pack
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 10.0.x
+
+      - name: Restore
+        run: dotnet restore PasarGuardApiClient.sln
+
+      - name: Verify formatting
+        run: dotnet format PasarGuardApiClient.sln --verify-no-changes --no-restore
+
+      - name: Build
+        run: dotnet build PasarGuardApiClient.sln --configuration Release --no-restore
+
+      - name: Test
+        run: dotnet test PasarGuardApiClient.sln --configuration Release --no-build --logger trx --results-directory TestResults
+
+      - name: Pack
+        run: dotnet pack "$PACKAGE_PROJECT" --configuration Release --no-build --output "$PACKAGE_OUTPUT"
+
+      - name: Upload package
+        uses: actions/upload-artifact@v4
+        with:
+          name: nuget-package
+          path: |
+            artifacts/*.nupkg
+            artifacts/*.snupkg
+          if-no-files-found: error
+
+      - name: Upload test results
+        if: ${{ !cancelled() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-results
+          path: TestResults/*.trx
+          if-no-files-found: error

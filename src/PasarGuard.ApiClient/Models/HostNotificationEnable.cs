@@ -1,21 +1,19 @@
-using System;
-using System.Collections.Generic;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
 namespace PasarGuard.ApiClient.Models;
 
-public sealed partial record HostNotificationEnable
+public sealed record HostNotificationEnable
 {
-    [JsonPropertyName(@"create")]
+    [JsonPropertyName("create")]
     public bool Create { get; init; } = true;
 
-    [JsonPropertyName(@"modify")]
+    [JsonPropertyName("modify")]
     public bool Modify { get; init; } = true;
 
-    [JsonPropertyName(@"delete")]
+    [JsonPropertyName("delete")]
     public bool Delete { get; init; } = true;
 
-    [JsonPropertyName(@"modify_hosts")]
+    [JsonPropertyName("modify_hosts")]
     public bool ModifyHosts { get; init; } = true;
 }

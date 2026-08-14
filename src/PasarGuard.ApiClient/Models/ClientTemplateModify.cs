@@ -1,18 +1,16 @@
-using System;
-using System.Collections.Generic;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
 namespace PasarGuard.ApiClient.Models;
 
-public sealed partial record ClientTemplateModify
+public sealed record ClientTemplateModify
 {
-    [JsonPropertyName(@"name")]
+    [JsonPropertyName("name")]
     public string? Name { get; init; }
 
-    [JsonPropertyName(@"content")]
+    [JsonPropertyName("content")]
     public string? Content { get; init; }
 
-    [JsonPropertyName(@"is_default")]
+    [JsonPropertyName("is_default")]
     public bool? IsDefault { get; init; }
 }

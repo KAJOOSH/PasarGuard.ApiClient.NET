@@ -1,24 +1,22 @@
-using System;
-using System.Collections.Generic;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
 namespace PasarGuard.ApiClient.Models;
 
-public sealed partial record CoreCreate
+public sealed record CoreCreate
 {
-    [JsonPropertyName(@"name")]
+    [JsonPropertyName("name")]
     public string? Name { get; init; }
 
-    [JsonPropertyName(@"config")]
-    public required Dictionary<string, object?> Config { get; init; }
+    [JsonPropertyName("config")]
+    public required IReadOnlyDictionary<string, JsonElement> Config { get; init; }
 
-    [JsonPropertyName(@"type")]
+    [JsonPropertyName("type")]
     public CoreType? Type { get; init; }
 
-    [JsonPropertyName(@"exclude_inbound_tags")]
-    public List<JsonElement>? ExcludeInboundTags { get; init; }
+    [JsonPropertyName("exclude_inbound_tags")]
+    public IReadOnlyList<JsonElement>? ExcludeInboundTags { get; init; }
 
-    [JsonPropertyName(@"fallbacks_inbound_tags")]
-    public List<JsonElement>? FallbacksInboundTags { get; init; }
+    [JsonPropertyName("fallbacks_inbound_tags")]
+    public IReadOnlyList<JsonElement>? FallbacksInboundTags { get; init; }
 }

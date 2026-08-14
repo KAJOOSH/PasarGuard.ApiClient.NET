@@ -7,10 +7,10 @@ namespace PasarGuard.ApiClient.Models;
 [JsonConverter(typeof(PasarGuardEnumJsonConverter<ProxyHostALPN>))]
 public enum ProxyHostALPN
 {
-    [EnumMember(Value = @"http/1.1")]
+    [EnumMember(Value = "http/1.1")]
     Http11,
-    [EnumMember(Value = @"h2")]
+    [EnumMember(Value = "h2")]
     H2,
-    [EnumMember(Value = @"h3")]
+    [EnumMember(Value = "h3")]
     H3
 }

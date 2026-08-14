@@ -61,7 +61,7 @@ public abstract class ApiClientBase
 
             if (response.IsSuccessStatusCode)
             {
-                return ApiResult.Success(response.StatusCode);
+                return ApiResult.Success(response.StatusCode, ReadHeaders(response));
             }
 
             return await ReadFailureAsync(response, method, url, cancellationToken).ConfigureAwait(false);
@@ -112,9 +112,10 @@ public abstract class ApiClientBase
 
     private async Task<ApiResult<T>> ReadSuccessAsync<T>(HttpResponseMessage response, CancellationToken cancellationToken)
     {
+        var headers = ReadHeaders(response);
         if (response.Content.Headers.ContentLength == 0)
         {
-            return ApiResult<T>.Success(default, response.StatusCode);
+            return ApiResult<T>.Success(default, response.StatusCode, headers);
         }
 
         try
@@ -122,12 +123,12 @@ public abstract class ApiClientBase
             if (typeof(T) == typeof(string))
             {
                 var text = await response.Content.ReadAsStringAsync(cancellationToken).ConfigureAwait(false);
-                return ApiResult<T>.Success((T)(object)text, response.StatusCode);
+                return ApiResult<T>.Success((T)(object)text, response.StatusCode, headers);
             }
 
             await using var stream = await response.Content.ReadAsStreamAsync(cancellationToken).ConfigureAwait(false);
             var value = await JsonSerializer.DeserializeAsync<T>(stream, PasarGuardJsonSerializerOptions.Default, cancellationToken).ConfigureAwait(false);
-            return ApiResult<T>.Success(value, response.StatusCode);
+            return ApiResult<T>.Success(value, response.StatusCode, headers);
         }
         catch (Exception exception) when (exception is JsonException or NotSupportedException)
         {
@@ -141,7 +142,7 @@ public abstract class ApiClientBase
         var content = await response.Content.ReadAsStringAsync(cancellationToken).ConfigureAwait(false);
         var error = ApiErrorFactory.Create(response.StatusCode, response.ReasonPhrase ?? string.Empty, content);
         logger.LogWarning("HTTP request returned {StatusCode} for {Method} {Url}", (int)response.StatusCode, method, url);
-        return ApiResult<T>.Failure(error);
+        return ApiResult<T>.Failure(error, ReadHeaders(response));
     }
 
     private async Task<ApiResult> ReadFailureAsync(HttpResponseMessage response, HttpMethod method, string url, CancellationToken cancellationToken)
@@ -149,6 +150,17 @@ public abstract class ApiClientBase
         var content = await response.Content.ReadAsStringAsync(cancellationToken).ConfigureAwait(false);
         var error = ApiErrorFactory.Create(response.StatusCode, response.ReasonPhrase ?? string.Empty, content);
         logger.LogWarning("HTTP request returned {StatusCode} for {Method} {Url}", (int)response.StatusCode, method, url);
-        return ApiResult.Failure(error);
+        return ApiResult.Failure(error, ReadHeaders(response));
+    }
+
+    private static IReadOnlyDictionary<string, IReadOnlyList<string>> ReadHeaders(HttpResponseMessage response)
+    {
+        return response.Headers
+            .Concat(response.Content.Headers)
+            .GroupBy(header => header.Key, StringComparer.OrdinalIgnoreCase)
+            .ToDictionary(
+                group => group.Key,
+                group => (IReadOnlyList<string>)group.SelectMany(header => header.Value).ToArray(),
+                StringComparer.OrdinalIgnoreCase);
     }
 }

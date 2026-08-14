@@ -1,87 +1,85 @@
-using System;
-using System.Collections.Generic;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
 namespace PasarGuard.ApiClient.Models;
 
-public sealed partial record NodeResponse
+public sealed record NodeResponse
 {
-    [JsonPropertyName(@"name")]
+    [JsonPropertyName("name")]
     public required string Name { get; init; }
 
-    [JsonPropertyName(@"address")]
+    [JsonPropertyName("address")]
     public required string Address { get; init; }
 
-    [JsonPropertyName(@"port")]
+    [JsonPropertyName("port")]
     public long Port { get; init; } = 62050L;
 
-    [JsonPropertyName(@"api_port")]
+    [JsonPropertyName("api_port")]
     public long ApiPort { get; init; } = 62051L;
 
-    [JsonPropertyName(@"usage_coefficient")]
-    public double UsageCoefficient { get; init; } = 1.0;
+    [JsonPropertyName("usage_coefficient")]
+    public double UsageCoefficient { get; init; } = 1.0D;
 
-    [JsonPropertyName(@"connection_type")]
+    [JsonPropertyName("connection_type")]
     public required NodeConnectionType ConnectionType { get; init; }
 
-    [JsonPropertyName(@"server_ca")]
+    [JsonPropertyName("server_ca")]
     public required string ServerCa { get; init; }
 
-    [JsonPropertyName(@"keep_alive")]
+    [JsonPropertyName("keep_alive")]
     public required long KeepAlive { get; init; }
 
-    [JsonPropertyName(@"core_config_id")]
-    public long? CoreConfigId { get; init; }
+    [JsonPropertyName("core_config_id")]
+    public required long? CoreConfigId { get; init; }
 
-    [JsonPropertyName(@"api_key")]
-    public string? ApiKey { get; init; }
+    [JsonPropertyName("api_key")]
+    public required string? ApiKey { get; init; }
 
-    [JsonPropertyName(@"data_limit")]
+    [JsonPropertyName("data_limit")]
     public long DataLimit { get; init; } = 0L;
 
-    [JsonPropertyName(@"data_limit_reset_strategy")]
+    [JsonPropertyName("data_limit_reset_strategy")]
     public DataLimitResetStrategy DataLimitResetStrategy { get; init; } = DataLimitResetStrategy.NoReset;
 
-    [JsonPropertyName(@"reset_time")]
+    [JsonPropertyName("reset_time")]
     public long ResetTime { get; init; } = -1L;
 
-    [JsonPropertyName(@"default_timeout")]
+    [JsonPropertyName("default_timeout")]
     public long DefaultTimeout { get; init; } = 10L;
 
-    [JsonPropertyName(@"internal_timeout")]
+    [JsonPropertyName("internal_timeout")]
     public long InternalTimeout { get; init; } = 15L;
 
-    [JsonPropertyName(@"proxy_url")]
+    [JsonPropertyName("proxy_url")]
     public string? ProxyUrl { get; init; }
 
-    [JsonPropertyName(@"id")]
+    [JsonPropertyName("id")]
     public required long Id { get; init; }
 
-    [JsonPropertyName(@"xray_version")]
-    public string? XrayVersion { get; init; }
+    [JsonPropertyName("xray_version")]
+    public required string? XrayVersion { get; init; }
 
-    [JsonPropertyName(@"node_version")]
-    public string? NodeVersion { get; init; }
+    [JsonPropertyName("node_version")]
+    public required string? NodeVersion { get; init; }
 
-    [JsonPropertyName(@"status")]
+    [JsonPropertyName("status")]
     public required NodeStatus Status { get; init; }
 
-    [JsonPropertyName(@"message")]
-    public string? Message { get; init; }
+    [JsonPropertyName("message")]
+    public required string? Message { get; init; }
 
-    [JsonPropertyName(@"uplink")]
+    [JsonPropertyName("uplink")]
     public long Uplink { get; init; } = 0L;
 
-    [JsonPropertyName(@"downlink")]
+    [JsonPropertyName("downlink")]
     public long Downlink { get; init; } = 0L;
 
-    [JsonPropertyName(@"lifetime_uplink")]
+    [JsonPropertyName("lifetime_uplink")]
     public long? LifetimeUplink { get; init; }
 
-    [JsonPropertyName(@"lifetime_downlink")]
+    [JsonPropertyName("lifetime_downlink")]
     public long? LifetimeDownlink { get; init; }
 
-    [JsonPropertyName(@"core_version")]
-    public string? CoreVersion { get; init; }
+    [JsonPropertyName("core_version")]
+    public required string? CoreVersion { get; init; }
 }

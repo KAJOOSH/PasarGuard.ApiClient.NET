@@ -7,14 +7,14 @@ namespace PasarGuard.ApiClient.Models;
 [JsonConverter(typeof(PasarGuardEnumJsonConverter<NodeStatus>))]
 public enum NodeStatus
 {
-    [EnumMember(Value = @"connected")]
+    [EnumMember(Value = "connected")]
     Connected,
-    [EnumMember(Value = @"connecting")]
+    [EnumMember(Value = "connecting")]
     Connecting,
-    [EnumMember(Value = @"error")]
+    [EnumMember(Value = "error")]
     Error,
-    [EnumMember(Value = @"disabled")]
+    [EnumMember(Value = "disabled")]
     Disabled,
-    [EnumMember(Value = @"limited")]
+    [EnumMember(Value = "limited")]
     Limited
 }

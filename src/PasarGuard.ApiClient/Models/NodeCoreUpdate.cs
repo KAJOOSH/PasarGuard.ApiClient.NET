@@ -1,12 +1,10 @@
-using System;
-using System.Collections.Generic;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
 namespace PasarGuard.ApiClient.Models;
 
-public sealed partial record NodeCoreUpdate
+public sealed record NodeCoreUpdate
 {
-    [JsonPropertyName(@"core_version")]
-    public string CoreVersion { get; init; } = @"latest";
+    [JsonPropertyName("core_version")]
+    public string CoreVersion { get; init; } = "latest";
 }

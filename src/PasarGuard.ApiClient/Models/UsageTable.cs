@@ -7,8 +7,8 @@ namespace PasarGuard.ApiClient.Models;
 [JsonConverter(typeof(PasarGuardEnumJsonConverter<UsageTable>))]
 public enum UsageTable
 {
-    [EnumMember(Value = @"node_user_usages")]
+    [EnumMember(Value = "node_user_usages")]
     NodeUserUsages,
-    [EnumMember(Value = @"node_usages")]
+    [EnumMember(Value = "node_usages")]
     NodeUsages
 }

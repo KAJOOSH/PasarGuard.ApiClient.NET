@@ -7,8 +7,8 @@ namespace PasarGuard.ApiClient.Models;
 [JsonConverter(typeof(PasarGuardEnumJsonConverter<RunMethod>))]
 public enum RunMethod
 {
-    [EnumMember(Value = @"webhook")]
+    [EnumMember(Value = "webhook")]
     Webhook,
-    [EnumMember(Value = @"long-polling")]
+    [EnumMember(Value = "long-polling")]
     LongPolling
 }

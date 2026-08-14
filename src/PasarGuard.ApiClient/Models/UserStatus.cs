@@ -7,14 +7,14 @@ namespace PasarGuard.ApiClient.Models;
 [JsonConverter(typeof(PasarGuardEnumJsonConverter<UserStatus>))]
 public enum UserStatus
 {
-    [EnumMember(Value = @"active")]
+    [EnumMember(Value = "active")]
     Active,
-    [EnumMember(Value = @"disabled")]
+    [EnumMember(Value = "disabled")]
     Disabled,
-    [EnumMember(Value = @"limited")]
+    [EnumMember(Value = "limited")]
     Limited,
-    [EnumMember(Value = @"expired")]
+    [EnumMember(Value = "expired")]
     Expired,
-    [EnumMember(Value = @"on_hold")]
+    [EnumMember(Value = "on_hold")]
     OnHold
 }

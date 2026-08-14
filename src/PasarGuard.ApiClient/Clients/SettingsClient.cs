@@ -1,8 +1,4 @@
-using System.Collections.Generic;
-using System.Net.Http;
 using System.Text.Json;
-using System.Threading;
-using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
 using PasarGuard.ApiClient.Abstractions;
 using PasarGuard.ApiClient.Core;
@@ -17,23 +13,26 @@ public sealed class SettingsClient : ApiClientBase, ISettingsClient
     {
     }
 
-    public Task<ApiResult<SettingsSchemaOutput>> GetSettingsAsync(CancellationToken cancellationToken = default)
+    [ApiEndpoint("GET", "/api/settings", "get_settings")]
+    public Task<ApiResult<SettingsSchema>> GetSettingsAsync(CancellationToken cancellationToken = default)
     {
-        var path = @"/api/settings";
+        var path = "/api/settings";
         var url = path;
-        return SendAsync<SettingsSchemaOutput>(HttpMethod.Get, url, null, RequestBodyKind.None, null, cancellationToken);
+        return SendAsync<SettingsSchema>(HttpMethod.Get, url, null, RequestBodyKind.None, null, cancellationToken);
     }
 
-    public Task<ApiResult<SettingsSchemaOutput>> ModifySettingsAsync(SettingsSchemaInput request, CancellationToken cancellationToken = default)
+    [ApiEndpoint("PUT", "/api/settings", "modify_settings")]
+    public Task<ApiResult<SettingsSchema>> ModifySettingsAsync(SettingsSchema request, CancellationToken cancellationToken = default)
     {
-        var path = @"/api/settings";
+        var path = "/api/settings";
         var url = path;
-        return SendAsync<SettingsSchemaOutput>(HttpMethod.Put, url, request, RequestBodyKind.Json, null, cancellationToken);
+        return SendAsync<SettingsSchema>(HttpMethod.Put, url, request, RequestBodyKind.Json, null, cancellationToken);
     }
 
+    [ApiEndpoint("GET", "/api/settings/general", "get_general_settings")]
     public Task<ApiResult<General>> GetGeneralSettingsAsync(CancellationToken cancellationToken = default)
     {
-        var path = @"/api/settings/general";
+        var path = "/api/settings/general";
         var url = path;
         return SendAsync<General>(HttpMethod.Get, url, null, RequestBodyKind.None, null, cancellationToken);
     }
