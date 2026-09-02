@@ -9,7 +9,7 @@
     <Deterministic>true</Deterministic>
     <ContinuousIntegrationBuild Condition="'$(CI)' == 'true'">true</ContinuousIntegrationBuild>
     <PackageId>PasarGuard.ApiClient</PackageId>
-    <PasarGuardApiVersion>5.2.1</PasarGuardApiVersion>
+    <PasarGuardApiVersion>5.3.0</PasarGuardApiVersion>
     <PackageRevision>1</PackageRevision>
     <VersionPrefix>$(PasarGuardApiVersion).$(PackageRevision)</VersionPrefix>
     <Authors>PasarGuard.ApiClient.NET contributors</Authors>

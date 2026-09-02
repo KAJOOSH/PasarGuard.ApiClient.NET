@@ -5,12 +5,12 @@
 [![CI](https://github.com/KAJOOSH/PasarGuard.ApiClient.NET/actions/workflows/ci.yml/badge.svg)](https://github.com/KAJOOSH/PasarGuard.ApiClient.NET/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 
-PasarGuard.ApiClient is a strongly typed, asynchronous .NET client for PasarGuardAPI. It provides dependency-injection integration, bearer-token authentication, typed request and response models, structured error handling, response headers, and cancellation support across the complete PasarGuardAPI `5.2.1` surface.
+PasarGuard.ApiClient is a strongly typed, asynchronous .NET client for PasarGuardAPI. It provides dependency-injection integration, bearer-token authentication, typed request and response models, structured error handling, response headers, and cancellation support across the complete PasarGuardAPI `5.3.0` surface.
 
 ## Requirements
 
 - .NET 10 or later
-- A PasarGuardAPI `5.2.1` instance
+- A PasarGuardAPI `5.3.0` instance
 
 ## Installation
 
@@ -23,7 +23,7 @@ dotnet add package PasarGuard.ApiClient
 Or add it directly to your project:
 
 ```xml
-<PackageReference Include="PasarGuard.ApiClient" Version="5.2.1.1" />
+<PackageReference Include="PasarGuard.ApiClient" Version="5.3.0.1" />
 ```
 
 ## Configuration
@@ -175,7 +175,7 @@ Each package release identifies its supported PasarGuardAPI version. Application
 
 ## Versioning
 
-Package versions use the format `PasarGuardAPI version.Package revision`. For example, `5.2.1.1` targets PasarGuardAPI `5.2.1` and represents the first client-package revision for that API release. Package-only fixes increment the fourth segment, while support for a new PasarGuardAPI release updates the first three segments and resets the package revision to `1`.
+Package versions use the format `PasarGuardAPI version.Package revision`. For example, `5.3.0.1` targets PasarGuardAPI `5.3.0` and represents the first client-package revision for that API release. Package-only fixes increment the fourth segment, while support for a new PasarGuardAPI release updates the first three segments and resets the package revision to `1`.
 
 ## License
 

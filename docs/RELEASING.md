@@ -39,7 +39,7 @@ Package versions use `PasarGuardApiVersion.PackageRevision`. The first three seg
 For a package-only fix, increment `PackageRevision` and push the commit to `master`:
 
 ```xml
-<PasarGuardApiVersion>5.2.1</PasarGuardApiVersion>
+<PasarGuardApiVersion>5.3.0</PasarGuardApiVersion>
 <PackageRevision>2</PackageRevision>
 ```
 

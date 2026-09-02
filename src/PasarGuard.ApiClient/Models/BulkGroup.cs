@@ -11,6 +11,9 @@ public sealed record BulkGroup
     [JsonPropertyName("has_group_ids")]
     public IReadOnlyList<long>? HasGroupIds { get; init; }
 
+    [JsonPropertyName("has_no_group")]
+    public bool HasNoGroup { get; init; } = false;
+
     [JsonPropertyName("admins")]
     public IReadOnlyList<long>? Admins { get; init; }
 

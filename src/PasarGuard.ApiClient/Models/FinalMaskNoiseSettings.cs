@@ -9,7 +9,7 @@ public sealed record FinalMaskNoiseSettings
     public JsonElement? Reset { get; init; }
 
     [JsonPropertyName("noise")]
-    public IReadOnlyList<XrayNoiseSettings>? Noise { get; init; }
+    public IReadOnlyList<FinalMaskNoiseItem>? Noise { get; init; }
 
     [JsonExtensionData]
     public Dictionary<string, JsonElement> AdditionalProperties { get; init; } = [];

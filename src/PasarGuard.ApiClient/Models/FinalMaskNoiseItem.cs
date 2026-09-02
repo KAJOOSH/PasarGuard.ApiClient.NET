@@ -3,10 +3,10 @@ using System.Text.Json.Serialization;
 
 namespace PasarGuard.ApiClient.Models;
 
-public sealed record XrayNoiseSettings
+public sealed record FinalMaskNoiseItem
 {
     [JsonPropertyName("type")]
-    public required string Type { get; init; }
+    public string? Type { get; init; }
 
     [JsonPropertyName("packet")]
     public JsonElement? Packet { get; init; }
@@ -14,11 +14,11 @@ public sealed record XrayNoiseSettings
     [JsonPropertyName("delay")]
     public JsonElement? Delay { get; init; }
 
-    [JsonPropertyName("apply_to")]
-    public string ApplyTo { get; init; } = "ip";
-
     [JsonPropertyName("rand")]
     public JsonElement? Rand { get; init; }
+
+    [JsonPropertyName("randRange")]
+    public string? RandRange { get; init; }
 
     [JsonExtensionData]
     public Dictionary<string, JsonElement> AdditionalProperties { get; init; } = [];

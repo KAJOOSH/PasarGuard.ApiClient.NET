@@ -335,7 +335,7 @@ public sealed class UserClient : ApiClientBase, IUserClient
     }
 
     [ApiEndpoint("GET", "/api/users", "get_users")]
-    public Task<ApiResult<UsersResponse>> GetUsersAsync(long? offset = null, long? limit = null, IReadOnlyList<long>? ids = null, IReadOnlyList<string>? username = null, IReadOnlyList<string>? usernames = null, IReadOnlyList<string>? admin = null, IReadOnlyList<long>? adminIds = null, IReadOnlyList<long>? group = null, string? search = null, JsonElement? status = null, string? sort = null, string? proxyId = null, JsonElement? dataLimitResetStrategy = null, long? dataLimitMin = null, long? dataLimitMax = null, DateTimeOffset? expireAfter = null, DateTimeOffset? expireBefore = null, DateTimeOffset? onlineAfter = null, DateTimeOffset? onlineBefore = null, bool online = false, bool noDataLimit = false, bool noExpire = false, bool loadSub = false, CancellationToken cancellationToken = default)
+    public Task<ApiResult<UsersResponse>> GetUsersAsync(long? offset = null, long? limit = null, IReadOnlyList<long>? ids = null, IReadOnlyList<string>? username = null, IReadOnlyList<string>? usernames = null, IReadOnlyList<string>? admin = null, IReadOnlyList<long>? adminIds = null, IReadOnlyList<long>? group = null, bool noGroup = false, string? search = null, JsonElement? status = null, string? sort = null, string? proxyId = null, JsonElement? dataLimitResetStrategy = null, long? dataLimitMin = null, long? dataLimitMax = null, DateTimeOffset? expireAfter = null, DateTimeOffset? expireBefore = null, DateTimeOffset? onlineAfter = null, DateTimeOffset? onlineBefore = null, bool online = false, bool noDataLimit = false, bool noExpire = false, bool loadSub = false, CancellationToken cancellationToken = default)
     {
         var path = "/api/users";
         var query = new QueryStringBuilder()
@@ -347,6 +347,7 @@ public sealed class UserClient : ApiClientBase, IUserClient
             .Add("admin", admin)
             .Add("admin_ids", adminIds)
             .Add("group", group)
+            .Add("no_group", noGroup)
             .Add("search", search)
             .Add("status", status)
             .Add("sort", sort)

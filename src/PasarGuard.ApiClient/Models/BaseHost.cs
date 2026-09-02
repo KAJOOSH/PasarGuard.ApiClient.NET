@@ -94,4 +94,7 @@ public sealed record BaseHost
 
     [JsonPropertyName("final_mask_settings")]
     public FinalMask? FinalMaskSettings { get; init; }
+
+    [JsonPropertyName("cipher_suites")]
+    public string? CipherSuites { get; init; }
 }

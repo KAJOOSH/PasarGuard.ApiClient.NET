@@ -44,8 +44,8 @@ public sealed class OpenApiCoverageTests
         var expectedCount = document.RootElement.GetProperty("components").GetProperty("schemas").EnumerateObject().Count();
         var actualCount = typeof(IPasarGuardApiClient).Assembly.GetTypes().Count(type => type.Namespace == "PasarGuard.ApiClient.Models");
 
-        Assert.Equal("5.2.1", document.RootElement.GetProperty("info").GetProperty("version").GetString());
-        Assert.Equal(252, expectedCount);
+        Assert.Equal("5.3.0", document.RootElement.GetProperty("info").GetProperty("version").GetString());
+        Assert.Equal(253, expectedCount);
         Assert.Equal(expectedCount, actualCount);
     }
 
